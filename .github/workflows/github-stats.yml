@@ -24,22 +24,35 @@ jobs:
           git fetch origin "${GITHUB_REF_NAME}"
           git reset --hard "origin/${GITHUB_REF_NAME}"
 
+      - name: Check out github-stats source
+        uses: actions/checkout@v4
+        with:
+          repository: jstrieb/github-stats
+          ref: ef574fae2ce8311f3e1ebb43e07c0c0fae0a41b6
+          path: github-stats-src
+
+      - name: Set up Zig
+        uses: mlugg/setup-zig@d1434d08867e3ee9daa34448df10607b98908d29
+        with:
+          version: 0.16.0
+
       - name: Generate stats images
         run: |
           set -euo pipefail
-          curl --fail --location --output /tmp/github-stats \
-            "https://github.com/jstrieb/github-stats/releases/download/2.0.1/github-stats_x86_64-linux"
-          echo "5e15e02803559cec5b5bdae4f202939846789c4cd3a34cfd24ee9ff13d6902c5  /tmp/github-stats" | sha256sum --check --status
-          chmod +x /tmp/github-stats
+          cd github-stats-src
+          zig build
           export ACCESS_TOKEN="${ACCESS_TOKEN:-$GITHUB_TOKEN}"
-          /tmp/github-stats
+          mkdir -p ../generated
+          ./zig-out/bin/github-stats \
+            --overview-output-file ../generated/overview.svg \
+            --languages-output-file ../generated/languages.svg \
+            --json-output-file ../generated/stats.json
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           GITHUB_TOKEN: ${{ github.token }}
           EXCLUDE_REPOS: ${{ secrets.EXCLUDE_REPOS }}
           EXCLUDE_LANGS: ${{ secrets.EXCLUDE_LANGS }}
           SILENT: "true"
-          USERNAME: delaram-m
 
       - name: Commit generated images
         run: |
