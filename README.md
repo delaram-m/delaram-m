@@ -6,3 +6,7 @@
 - 🤔 Always looking for new ways to grow as a computer scientist in a world increasingly shaped by AI.
 - 📫 Connect with me and message me on LinkedIn: [linkedin.com/in/delaram-m-](https://www.linkedin.com/in/delaram-m-/).
 - ✨ Check out my portfolio website: [delaram-m.lovable.app](https://delaram-m.lovable.app/).
+
+### Languages used in my GitHub projects:
+
+![](https://raw.githubusercontent.com/delaram-m/delaram-m/master/generated/languages.svg)

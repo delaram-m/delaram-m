@@ -1,0 +1,21 @@
+name: Generate GitHub Stats Images
+
+on:
+  schedule:
+    # Runs once a day at 00:00 UTC
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+jobs:
+  generate-images:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate stats images
+        uses: jstrieb/github-stats@master
+        with:
+          username: delaram-m
+          access_token: ${{ secrets.GITHUB_TOKEN }}
+          exclude_repos: ""
+          exclude_langs: ""
