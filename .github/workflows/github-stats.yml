@@ -41,12 +41,15 @@ jobs:
           set -euo pipefail
           cd github-stats-src
           zig build
-          export ACCESS_TOKEN="${ACCESS_TOKEN:-$GITHUB_TOKEN}"
+          token="${ACCESS_TOKEN:-$GITHUB_TOKEN}"
           mkdir -p ../generated
           ./zig-out/bin/github-stats \
+            --access-token "$token" \
             --overview-output-file ../generated/overview.svg \
             --languages-output-file ../generated/languages.svg \
-            --json-output-file ../generated/stats.json
+            --json-output-file ../generated/stats.json \
+            --exclude-repos "${EXCLUDE_REPOS:-}" \
+            --exclude-langs "${EXCLUDE_LANGS:-}"
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           GITHUB_TOKEN: ${{ github.token }}
