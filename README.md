@@ -9,4 +9,5 @@
 
 ### Languages used in my GitHub projects:
 
-![](https://raw.githubusercontent.com/delaram-m/delaram-m/master/generated/languages.svg)
+![](https://raw.githubusercontent.com/delaram-m/delaram-m/generated/languages.svg#gh-dark-mode-only)
+![](https://raw.githubusercontent.com/delaram-m/delaram-m/generated/languages.svg#gh-light-mode-only)
