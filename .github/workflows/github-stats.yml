@@ -21,12 +21,13 @@ jobs:
 
       - name: Sync latest branch state
         run: |
-          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git fetch origin "${GITHUB_REF_NAME}"
+          git reset --hard "origin/${GITHUB_REF_NAME}"
 
       - name: Generate stats images
         run: |
           set -euo pipefail
-          curl --location --output /tmp/github-stats \
+          curl --fail --location --output /tmp/github-stats \
             "https://github.com/jstrieb/github-stats/releases/download/2.0.1/github-stats_x86_64-linux"
           echo "5e15e02803559cec5b5bdae4f202939846789c4cd3a34cfd24ee9ff13d6902c5  /tmp/github-stats" | sha256sum --check --status
           chmod +x /tmp/github-stats
