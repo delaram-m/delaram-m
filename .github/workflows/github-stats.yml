@@ -17,12 +17,16 @@ jobs:
 
       - name: Generate stats images
         run: |
+          set -euo pipefail
           curl --location --output /tmp/github-stats \
-            "https://github.com/jstrieb/github-stats/releases/latest/download/github-stats_x86_64-linux"
+            "https://github.com/jstrieb/github-stats/releases/download/2.0.1/github-stats_x86_64-linux"
+          echo "5e15e02803559cec5b5bdae4f202939846789c4cd3a34cfd24ee9ff13d6902c5  /tmp/github-stats" | sha256sum --check --status
           chmod +x /tmp/github-stats
+          export ACCESS_TOKEN="${ACCESS_TOKEN:-$GITHUB_TOKEN}"
           /tmp/github-stats
         env:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN || github.token }}
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
           EXCLUDE_REPOS: ${{ secrets.EXCLUDE_REPOS }}
           EXCLUDE_LANGS: ${{ secrets.EXCLUDE_LANGS }}
           SILENT: "true"
