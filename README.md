@@ -9,5 +9,4 @@
 
 ### Languages used in my GitHub projects:
 
-![](https://raw.githubusercontent.com/delaram-m/delaram-m/generated/languages.svg#gh-dark-mode-only)
-![](https://raw.githubusercontent.com/delaram-m/delaram-m/generated/languages.svg#gh-light-mode-only)
+[![Top Langs](https://github-stats-extended.vercel.app/api/top-langs/?username=delaram-m&layout=compact&theme=light_github)](https://github.com/stats-organization/github-stats-extended)
